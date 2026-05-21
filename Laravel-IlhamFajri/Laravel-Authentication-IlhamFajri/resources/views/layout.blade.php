@@ -31,6 +31,26 @@
         .btn-modern:hover {
             transform: translateY(-2px);
         }
+        .btn-dashboard {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 11px 20px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+        .btn-dashboard:hover {
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+        .btn-icon {
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+        }
         .table tbody tr {
             transition: all .25s ease;
         }

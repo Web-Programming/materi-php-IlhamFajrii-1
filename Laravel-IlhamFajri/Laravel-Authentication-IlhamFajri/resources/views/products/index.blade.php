@@ -10,9 +10,17 @@
             <p class="text-secondary mb-0">Dashboard produk</p>
         </div>
 
-        <a href="/products/create" class="btn btn-dark btn-modern">
-            + Tambah Produk
-        </a>
+        <div class="d-flex gap-2 flex-wrap">
+            <a href="{{ route('admin.dashboard') }}" class="btn btn-modern btn-dashboard">
+                <svg xmlns="http://www.w3.org/2000/svg" class="btn-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10l9-7 9 7v11a1 1 0 01-1 1h-5v-6H9v6H4a1 1 0 01-1-1V10z"/>
+                </svg>
+                Dashboard
+            </a>
+            <a href="/products/create" class="btn btn-dark btn-modern">
+                + Tambah Produk
+            </a>
+        </div>
     </div>
 
     @if(session('success'))
