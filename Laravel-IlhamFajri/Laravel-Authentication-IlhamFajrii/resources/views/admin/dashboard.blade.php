@@ -5,7 +5,14 @@
 @section('content')
 <div class="page-header">
     <h1 class="page-title">Dashboard</h1>
-    <p class="page-subtitle">Selamat datang kembali, {{ $userName }}! 👋</p>
+    <p class="page-subtitle">Selamat datang kembali, {{ $userName }}! 👋
+        @if($search)
+            <span style="background: #dbeafe; color: #1e40af; padding: 2px 8px; border-radius: 4px; font-size: 12px; margin-left: 10px; font-weight: 600;">
+                Hasil pencarian: "{{ $search }}"
+                <a href="{{ route('admin.dashboard') }}" style="color: #1e40af; text-decoration: none; margin-left: 5px;">✕</a>
+            </span>
+        @endif
+    </p>
 </div>
 
 <!-- Stats Cards -->

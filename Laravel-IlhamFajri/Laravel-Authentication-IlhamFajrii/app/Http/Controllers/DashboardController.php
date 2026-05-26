@@ -4,30 +4,58 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // Total barang
-        $totalBarang = Product::count();
+        // Get search query
+        $search = $request->get('search');
+        
+        // Total barang (berdasarkan search jika ada)
+        $query = Product::query();
+        if ($search) {
+            $query->where('name', 'like', '%' . $search . '%')
+                  ->orWhere('description', 'like', '%' . $search . '%');
+        }
+        $totalBarang = $query->count();
         
         // Barang tersedia
-        $barangTersedia = Product::where('status', 'tersedia')->count();
+        $barangTersedia = Product::where('status', 'tersedia')
+            ->when($search, function($q) use ($search) {
+                return $q->where('name', 'like', '%' . $search . '%')
+                          ->orWhere('description', 'like', '%' . $search . '%');
+            })
+            ->count();
         
         // Barang habis
-        $barangHabis = Product::where('status', 'habis')->count();
+        $barangHabis = Product::where('status', 'habis')
+            ->when($search, function($q) use ($search) {
+                return $q->where('name', 'like', '%' . $search . '%')
+                          ->orWhere('description', 'like', '%' . $search . '%');
+            })
+            ->count();
         
         // Total nilai stok (price * stock untuk setiap produk, kemudian dijumlahkan)
         $totalNilaiStok = Product::selectRaw('SUM(price * stock) as total')
-                                 ->value('total') ?? 0;
+            ->when($search, function($q) use ($search) {
+                return $q->where('name', 'like', '%' . $search . '%')
+                          ->orWhere('description', 'like', '%' . $search . '%');
+            })
+            ->value('total') ?? 0;
         
         // Get user name
-        $userName = auth()->user()->name;
+        $userName = Auth::user()->name ?? 'User';
         
-        // Ambil beberapa produk terbaru untuk ditampilkan di dashboard
-        $produkTerbaru = Product::latest()->take(5)->get();
+        // Ambil beberapa produk terbaru untuk ditampilkan di dashboard (dengan filter search)
+        $produkTerbaru = Product::latest()
+            ->when($search, function($q) use ($search) {
+                return $q->where('name', 'like', '%' . $search . '%')
+                          ->orWhere('description', 'like', '%' . $search . '%');
+            })
+            ->take(5)
+            ->get();
         
         return view('admin.dashboard', compact(
             'totalBarang',
@@ -35,7 +63,8 @@ class DashboardController extends Controller
             'barangHabis',
             'totalNilaiStok',
             'userName',
-            'produkTerbaru'
+            'produkTerbaru',
+            'search'
         ));
     }
 }

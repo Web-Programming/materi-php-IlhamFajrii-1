@@ -63,13 +63,20 @@
             max-width: 400px;
         }
 
+        .topbar-search form {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
         .topbar-search input {
             background: rgba(255, 255, 255, 0.15);
             border: 1px solid rgba(255, 255, 255, 0.3);
             color: white;
             padding: 8px 12px;
             border-radius: 8px;
-            width: 100%;
+            flex: 1;
+            transition: all 0.3s ease;
         }
 
         .topbar-search input::placeholder {
@@ -80,8 +87,25 @@
             background: rgba(255, 255, 255, 0.2);
             border-color: rgba(255, 255, 255, 0.5);
             color: white;
-            box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
             outline: none;
+        }
+
+        .topbar-search button {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .topbar-search button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
         }
 
         .topbar-right {
@@ -387,7 +411,12 @@
                 <span>PT. ABC Inventaris</span>
             </a>
             <div class="topbar-search">
-                <input type="text" placeholder="Cari produk...">
+                <form action="{{ route('admin.dashboard') }}" method="GET" class="w-100">
+                    <input type="text" name="search" placeholder="Cari produk..." value="{{ request('search') }}" autocomplete="off">
+                    <button type="submit" title="Cari">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </form>
             </div>
         </div>
         <div class="topbar-right">
