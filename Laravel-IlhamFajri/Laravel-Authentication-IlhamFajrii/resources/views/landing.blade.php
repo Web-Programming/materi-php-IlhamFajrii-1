@@ -21,10 +21,10 @@
 
                 <!-- Buttons -->
                 <div class="flex items-center space-x-4">
-                    <a href="/" class="px-4 py-2 text-white hover:text-blue-400 transition duration-300 font-medium">
+                    <a href="/login" class="px-4 py-2 text-white hover:text-blue-400 transition duration-300 font-medium">
                         Login
                     </a>
-                    <a href="/" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-300 font-medium">
+                    <a href="/register" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-300 font-medium">
                         Daftar
                     </a>
                 </div>
@@ -54,17 +54,7 @@
 
             <!-- Buttons -->
             <div class="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-                <!-- Login Button -->
-                <a href="/login" class="flex items-center justify-center space-x-2 px-8 py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition duration-300 shadow-md hover:shadow-lg">
-                    <i class="bi bi-box-arrow-in-right"></i>
-                    <span>Login</span>
-                </a>
-
-                <!-- Daftar Button -->
-                <a href="/register" class="flex items-center justify-center space-x-2 px-8 py-3 border-2 border-blue-500 text-blue-500 font-semibold rounded-lg hover:bg-blue-50 transition duration-300">
-                    <i class="bi bi-person-plus"></i>
-                    <span>Daftar Akun</span>
-                </a>
+   
             </div>
         </div>
     </section>
